@@ -57,9 +57,7 @@ class Details extends Component {
             })
         }).then(() => {
             console.log("update clicked");
-            //window.location.reload(true);
             this.props.history.push('/');
-            //this.getChirps();
         }).catch((err) => {
             console.log(err);
         });
@@ -71,7 +69,6 @@ class Details extends Component {
         }).then(() => {
             console.log("delete success");
             this.props.history.push('/');
-
         }).catch((err) => {
             console.log(err);
         });
