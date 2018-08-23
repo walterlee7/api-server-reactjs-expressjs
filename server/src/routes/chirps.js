@@ -22,9 +22,9 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const chirp = store.GetChirp(id);
+    const Chirp = store.GetChirp(id);
 
-    if (!chirp || Object.keys(chirp).length === 0) {
+    if (!Chirp || Object.keys(Chirp).length === 0) {
         res.sendStatus(404);
         return;
     }

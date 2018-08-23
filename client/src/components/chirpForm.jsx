@@ -32,6 +32,7 @@ class ChirpForm extends Component {
                     className="btn btn-primary m-2">Post!
                 </button>
             </form>
+
         );
     };
 }

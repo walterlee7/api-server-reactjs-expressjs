@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import ChirpForm from './chirpForm';
 import ChirpList from './chirpList';
 
+import ShoppingCart from './shoppingCart';
+
+import BookForm from './bookForm';
+import BookList from './bookList';
+
 class Chirps extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            chirps: []
+            chirps: [],
+            books: []
         };
     }
 
     componentDidMount() {
         this.getChirps();
+        this.getBooks();
     }
 
     getChirps() {
@@ -56,11 +63,60 @@ class Chirps extends Component {
         });
     }
 
+
+    getBooks() {
+        fetch('/api/books/')
+            .then((response) => {
+                return response.json();
+            }).then((books) => {
+                let keys = Object.keys(books);
+                let booksArray = [];
+
+                for (let key of keys) {
+                    if (key !== 'nextid') {
+                        booksArray.push({
+                            text: books[key].text,
+                            id: key
+                        });
+                    }
+                }
+
+                this.setState({
+                    books: booksArray
+                });
+
+                // console.log(this.state.books);
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
+
+    addBook(text) {
+        console.log(text);
+        fetch('/api/books/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                text
+            })
+        }).then(() => {
+            this.getBooks();
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     render() {
         return (
             <div className="container">
                 <ChirpForm postChirp={(text) => { this.addChirp(text); }} />
+                <BookForm postBook={(text) => { this.addBook(text); }} />
+                <ShoppingCart />
+
                 <ChirpList chirps={this.state.chirps} />
+                <BookList books={this.state.books} />
             </div>
         );
     }
