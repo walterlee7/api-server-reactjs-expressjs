@@ -48,19 +48,25 @@ class Chirps extends Component {
     }
 
     addChirp(text) {
-        fetch('/api/chirps/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text
-            })
-        }).then(() => {
-            this.getChirps();
-        }).catch((err) => {
-            console.log(err);
-        });
+        if (text === '') {
+            alert("Add text!!");
+        } else {
+            fetch('/api/chirps/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text
+                })
+            }).then(() => {
+                this.getChirps();
+                window.location.reload(true);
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+
     }
 
 
@@ -106,6 +112,7 @@ class Chirps extends Component {
                 })
             }).then(() => {
                 this.getBooks();
+                window.location.reload(true);
             }).catch((err) => {
                 console.log(err);
             });

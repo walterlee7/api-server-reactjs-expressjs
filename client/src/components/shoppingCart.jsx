@@ -7,13 +7,14 @@ class ShoppingCart extends Component {
         this.state = {
             books: [],
             price: [],
+            total: 0
 
         };
     }
 
     componentDidMount() {
         this.getBooks();
-        this.addCart();
+
 
     }
 
@@ -22,9 +23,12 @@ class ShoppingCart extends Component {
             .then((response) => {
                 return response.json();
             }).then((books) => {
+
+                console.log('books: ' + books)
+
                 let keys = Object.keys(books);
                 let booksArray = [];
-
+                let priceArray = [];
 
                 for (let key of keys) {
                     if (key !== 'nextid') {
@@ -35,23 +39,44 @@ class ShoppingCart extends Component {
                     }
                 }
 
-
                 this.setState({
-                    books: booksArray,
-                    // price: priceArray
+                    books: booksArray
+
                 });
                 console.log('shopping detail');
                 console.log(this.state.books);
+                console.log(booksArray.length);
+                // console.log(booksArray[0].text.price);
+
+                for (let i = 0; i < booksArray.length; i++) {
+                    priceArray.push(parseFloat(booksArray[i].text.price, 2));
+                }
+
+                this.setState({
+                    price: priceArray
+                });
+                console.log('price: ' + this.state.price);
+
+                let totalPrice = priceArray.reduce((a, b) => parseFloat(a) + parseFloat(b));
+
+
+
+
+                console.log('totalPrice: ' + totalPrice);
+
+                this.setState({
+
+                    total: totalPrice
+                });
+
+                console.log('total: ' + this.state.total);
+
             }).catch((err) => {
                 console.log(err);
             });
     }
 
-    addCart() {
-        //need to set the state for price
 
-        console.log(this.state.price);
-    };
 
     render() {
         return (
@@ -61,7 +86,7 @@ class ShoppingCart extends Component {
                     className="d-block m-2">Shopping Cart
                 </label>
                 <p style={{ color: 'blue', padding: 25, }}>
-                    Total Price: {this.state.price}
+                    Total Price: ${this.state.total}
                 </p>
             </form>
 
