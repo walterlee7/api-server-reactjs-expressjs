@@ -93,8 +93,8 @@ class Chirps extends Component {
 
     addBook(text) {
         console.log("text: " + text);
-        if (text.book === '') {
-            alert('Enter a book title!');
+        if (text.book === '' || text.price === '') {
+            alert('Enter all info!');
         } else {
             fetch('/api/books/', {
                 method: 'POST',
