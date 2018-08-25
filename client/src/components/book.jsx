@@ -10,7 +10,7 @@ const Book = (props) => {
                     Book Name: {props.text.book}
                 </p>
                 <p className="card-text">
-                    Book Price: {props.text.price}
+                    Book Price: ${props.text.price}
                 </p>
                 <BookDetailButton id={props.index} />
             </div>

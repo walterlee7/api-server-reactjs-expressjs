@@ -11,11 +11,21 @@ class BookForm extends Component {
     }
 
     handleBookInput(book) {
+
         this.setState({ book });
+
     };
 
     handlePriceInput(price) {
-        this.setState({ price });
+        console.log("price: " + price);
+
+        if (price < 0) {
+            alert("Enter a positive number!!");
+        } else if (price === NaN) {
+            alert("Enter a number!!");
+        } else {
+            this.setState({ price });
+        }
     };
 
     render() {
@@ -37,6 +47,7 @@ class BookForm extends Component {
                 </label>
                 <input
                     value={this.state.price}
+                    type="number"
                     onChange={(event) => { this.handlePriceInput(event.target.value) }}
                     className="form-control w-70 m-2 d-inline"
                     placeholder="Book Price"

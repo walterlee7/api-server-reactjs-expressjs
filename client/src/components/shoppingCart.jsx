@@ -38,7 +38,7 @@ class ShoppingCart extends Component {
 
                 this.setState({
                     books: booksArray,
-                    price: priceArray
+                    // price: priceArray
                 });
                 console.log('shopping detail');
                 console.log(this.state.books);

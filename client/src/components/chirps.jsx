@@ -92,20 +92,25 @@ class Chirps extends Component {
     }
 
     addBook(text) {
-        console.log(text);
-        fetch('/api/books/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                text
-            })
-        }).then(() => {
-            this.getBooks();
-        }).catch((err) => {
-            console.log(err);
-        });
+        console.log("text: " + text);
+        if (text.book === '') {
+            alert('Enter a book title!');
+        } else {
+            fetch('/api/books/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text
+                })
+            }).then(() => {
+                this.getBooks();
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+
     }
 
     render() {
@@ -113,10 +118,13 @@ class Chirps extends Component {
             <div className="container">
                 <ChirpForm postChirp={(text) => { this.addChirp(text); }} />
                 <BookForm postBook={(text) => { this.addBook(text); }} />
-                <ShoppingCart />
+
 
                 <ChirpList chirps={this.state.chirps} />
                 <BookList books={this.state.books} />
+
+                <ShoppingCart />
+
             </div>
         );
     }
