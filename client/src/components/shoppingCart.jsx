@@ -7,14 +7,19 @@ class ShoppingCart extends Component {
         this.state = {
             books: [],
             price: [],
-            total: 0
+            total: 0,
+            tax: 0,
+            shipping: 0,
+            finalTotal: 0
 
         };
     }
 
     componentDidMount() {
         this.getBooks();
-
+        this.addTax();
+        this.addShipping();
+        this.addFinalTotal();
 
     }
 
@@ -57,10 +62,7 @@ class ShoppingCart extends Component {
                 });
                 console.log('price: ' + this.state.price);
 
-                let totalPrice = priceArray.reduce((a, b) => parseFloat(a) + parseFloat(b));
-
-
-
+                let totalPrice = priceArray.reduce((a, b) => parseFloat(a, 2) + parseFloat(b, 2));
 
                 console.log('totalPrice: ' + totalPrice);
 
@@ -76,7 +78,17 @@ class ShoppingCart extends Component {
             });
     }
 
+    addTax() {
 
+    }
+
+    addShipping() {
+
+    }
+
+    addFinalTotal() {
+
+    }
 
     render() {
         return (
@@ -87,8 +99,14 @@ class ShoppingCart extends Component {
                 </label>
                 <p style={{ color: 'blue', padding: 25, }}>
                     Total Price: ${this.state.total}
+                    <br></br>
+                    Sales Tax: ${this.state.tax}
+                    <br></br>
+                    Shipping Fee: ${this.state.shipping}
+                    <br></br>
+                    Final Total: ${this.state.finalTotal}
                 </p>
-            </form>
+            </form >
 
         );
     };

@@ -23,7 +23,8 @@ class BookForm extends Component {
         const re = /^[0-9.]+$/;
 
         if (price.target.value == '' || re.test(price.target.value)) {
-            this.setState({ price: price.target.value })
+            parseFloat(price.target.value, 2);
+            this.setState({ price: price.target.value });
         }
         // if (price < 0) {
         //     alert("Enter a positive number!!");

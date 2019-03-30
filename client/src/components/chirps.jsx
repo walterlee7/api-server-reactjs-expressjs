@@ -61,7 +61,7 @@ class Chirps extends Component {
                 })
             }).then(() => {
                 this.getChirps();
-                window.location.reload(true);
+                // window.location.reload(true);
             }).catch((err) => {
                 console.log(err);
             });
